@@ -1,80 +1,76 @@
-
+// Assignment 1
+// jchhabr1-MyBookWishlist
 
 package com.example.cmput301assignment1;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import java.util.ArrayList;
 
-import com.example.cmput301assignment1.databinding.ActivityMainBinding;
+public class MainActivity extends AppCompatActivity implements
+        AddBookFragment.AddBookDialogListener, EditBookFragment.EditBookDialogListener {
 
-import android.view.Menu;
-import android.view.MenuItem;
+    private ArrayList<Book> DataList;
+    private ListView BookList;
+    private BookArrayAdapter bookAdapter;
+    private int lastSelectedPosition = ListView.INVALID_POSITION;
 
-public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
-
+    @Override
+    public void addBook(Book book){
+        bookAdapter.add(book);
+        bookAdapter.notifyDataSetChanged();
+    }
+    @Override
+    public void editBook(Book editedBook){
+        if (lastSelectedPosition != ListView.INVALID_POSITION){
+            DataList.set(lastSelectedPosition,editedBook);
+            bookAdapter.notifyDataSetChanged();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        String[] BookTitles = {"1984", "Theory of Everything"};
+        String[] Authors = {"George Orwell","Stephen Hawking"};
+        String[] Genre = {"dystopian","science"};
+        String[] PublicationYear = {"1949","2002"};
+        String[] Status = {"Read", "Unread"};
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        DataList = new ArrayList<>();
 
-        setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        for (int i = 0; i < BookTitles.length; i++) {
+            DataList.add(new Book(BookTitles[i], Authors[i],Genre[i],PublicationYear[i],Status[i]));
         }
+        BookList = findViewById(R.id.BookList);
+        bookAdapter = new BookArrayAdapter(this, DataList);
+        BookList.setAdapter(bookAdapter);
+        FloatingActionButton fab = findViewById(R.id.buttonAddBook);
+        // Add city
+        fab.setOnClickListener(v -> {
+            new AddBookFragment().show(getSupportFragmentManager(), "Add Book");
+        });
 
-        return super.onOptionsItemSelected(item);
-    }
+    // Edit Book
+    BookList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            lastSelectedPosition = position;
+            EditBookFragment editBookFragment = new EditBookFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("SelectedBook", DataList.get(position));
+            editBookFragment.setArguments(bundle);
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+            // Show the fragment
+            editBookFragment.show(getSupportFragmentManager(), "Edit Book");
+        }
+    });
+}
 }

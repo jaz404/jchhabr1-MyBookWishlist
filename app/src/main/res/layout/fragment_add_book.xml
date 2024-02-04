@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="409dp"
+    android:layout_height="729dp"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <EditText
+        android:id="@+id/EditBookTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Book Title" />
+
+    <EditText
+        android:id="@+id/EditAuthorName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Author Name" />
+
+    <EditText
+        android:id="@+id/EditGenre"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Genre" />
+
+    <EditText
+        android:id="@+id/EditPublicationYear"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Publication Year" />
+
+    <EditText
+        android:id="@+id/EditStatus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Status" />
+</LinearLayout>
