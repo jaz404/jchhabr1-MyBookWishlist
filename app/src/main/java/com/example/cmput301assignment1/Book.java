@@ -8,6 +8,8 @@ import android.os.Parcelable;
 
 
 public class Book implements Parcelable {
+    // Book class Represents a single entity book with attributes: booktitle, authorname, genre, pulicationyear, status
+    // Also implements interface parcelable for transfer of books (entities) between the different components of the app
     // Attributes:
     private String BookTitle;
     private String AuthorName;

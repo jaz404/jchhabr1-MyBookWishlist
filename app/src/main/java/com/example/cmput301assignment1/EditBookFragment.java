@@ -18,11 +18,14 @@ import androidx.fragment.app.DialogFragment;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class EditBookFragment extends DialogFragment {
+    // EditBookFragment class extends DialogFragment which runs when selectes a book from the ListView.
+    // Uses the layout fragment_add_book to get user to change or delete a book.
+    // Creates interface EditBookDialogListener with two method: editBook and DeleteBook which is implemented in the MainAcitivity class.
     interface EditBookDialogListener {
         void editBook(Book book);
         void DeleteBook(Book book);
     }
-    private boolean once;
+    //private boolean once;
     private EditBookFragment.EditBookDialogListener listener;
     @Override
     public void onAttach(@NonNull Context context) {

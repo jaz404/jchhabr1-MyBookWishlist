@@ -16,19 +16,23 @@ import java.util.ArrayList;
 
 
 public class BookArrayAdapter extends ArrayAdapter<Book> {
+    // BookArrayAdapter class extends parent class ArrayAdapter using Book class as underlying data
+    // Displays list of books in the ListView
+    // Constructor:
     public BookArrayAdapter(Context context, ArrayList<Book> books) {
         super(context, 0, books);
     }
     @NonNull
     @Override
+
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup
             parent) {
         View view;
-        if (convertView == null) {
+        if (convertView == null) { // creates a view if no view can be recycled
             view = LayoutInflater.from(getContext()).inflate(R.layout.content,
                     parent, false);
         } else {
-            view = convertView;
+            view = convertView; // recycles the view
         }
         Book book = getItem(position);
         TextView BookTitle = view.findViewById(R.id.BookTitle);

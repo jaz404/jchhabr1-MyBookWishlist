@@ -1,5 +1,10 @@
-// Assignment 1
+// Assignment 1, CMPUT 301
 // jchhabr1-MyBookWishlist
+// Code written by Jaspreet Singh Chhabra, jchhabr1
+
+// References:
+// GPT3.5, openAI 2024
+// Prompts used are in text file app/prompts.txt
 
 package com.example.cmput301assignment1;
 
@@ -20,7 +25,11 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements
         AddBookFragment.AddBookDialogListener, EditBookFragment.EditBookDialogListener
       {
-
+    // MainActivity class which extends AppCompatActivity class facilitates the main functioning of the application.
+    // Serves as the mainscreen for the wishlist
+    // It allows adding, deleting, editing books in the wishlist
+    // Utilizes the BookArrayAdapter for creating a list of books in the ListView
+    // Deals with actions when user interacts with the app
     private ArrayList<Book> DataList;
     private ListView BookList;
     private BookArrayAdapter bookAdapter;
@@ -70,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements
         //String[] Authors = {"George Orwell","Stephen Hawking"};
         //String[] Genre = {"dystopian","science"};
         //String[] PublicationYear = {"1949","2002"};
-        boolean[] Status = {true, false};
+        //boolean[] St#atus = {true, false};
 
         DataList = new ArrayList<>();
 

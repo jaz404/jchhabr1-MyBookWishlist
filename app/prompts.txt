@@ -1,0 +1,5 @@
+Prompts:
+1. Explain how a parcelable interface works in an android app.
+2. How can I make a TextView which reflects the current state of a Switch in a fragment.
+3. How do i use Logcat for debugging and how do I print messages?
+4. If I have TextViews on my main screen that reflect total number of entities how would I make sure they are updated everytime after a user interaction.

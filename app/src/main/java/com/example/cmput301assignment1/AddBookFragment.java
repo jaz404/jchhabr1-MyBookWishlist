@@ -16,6 +16,9 @@ import androidx.fragment.app.DialogFragment;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class AddBookFragment extends DialogFragment {
+    // AddBookFragment class extends DialogFragment which runs when the user presses add book button.
+    // Uses the layout fragment_add_book to get user to fill in all the details of the new book in EditTexts.
+    // Creates interface AddBookDialogListener with one method: addBook which is implemented in the MainAcitivity class.
 
     interface AddBookDialogListener {
         void addBook(Book book);
