@@ -4,13 +4,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class AddBookFragment extends DialogFragment {
 
@@ -37,7 +40,14 @@ public class AddBookFragment extends DialogFragment {
         EditText EditAuthorName = view.findViewById(R.id.EditAuthorName);
         EditText EditGenre = view.findViewById(R.id.EditGenre);
         EditText EditPublicationYear = view.findViewById(R.id.EditPublicationYear);
-        EditText EditStatus = view.findViewById(R.id.EditStatus);
+        Switch EditStatus = view.findViewById(R.id.EditStatus);
+        AtomicReference<Boolean> switchStatus = new AtomicReference<>(false);
+        TextView EditStatusText = view.findViewById(R.id.EditStatusText); // New TextView for status text
+
+        EditStatusText.setText("Unread");
+        EditStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            EditStatusText.setText(isChecked ? "Read" : "Unread");
+        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
@@ -49,12 +59,19 @@ public class AddBookFragment extends DialogFragment {
                     String AuthorName = EditAuthorName.getText().toString();
                     String Genre = EditGenre.getText().toString();
                     String PublicationYear = EditPublicationYear.getText().toString();
-                    String Status = EditStatus.getText().toString();
+
+                    Boolean Status = switchStatus.get();
 
 
                     listener.addBook(new Book(BookTitle, AuthorName, Genre, PublicationYear , Status));
+                    if (getActivity() instanceof MainActivity) {
+                        ((MainActivity) getActivity()).UpdateBooksCount();
+                    }
                 })
+
                 .create();
+
+
     }
 
 }

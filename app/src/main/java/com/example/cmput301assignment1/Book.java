@@ -1,5 +1,6 @@
 package com.example.cmput301assignment1;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -13,11 +14,11 @@ public class Book implements Parcelable {
     private String Genre;
 
     private String PublicationYear;
-    private String Status;
-
+    //private String Status;
+    private Boolean Status;
 
     // Constructor of Book Class:
-    public Book(String BookTitle, String AuthorName, String Genre, String PublicationYear ,String Status){
+    public Book(String BookTitle, String AuthorName, String Genre, String PublicationYear ,Boolean Status){
         this.BookTitle = BookTitle;
         this.AuthorName = AuthorName;
         this.Genre = Genre;
@@ -44,7 +45,7 @@ public class Book implements Parcelable {
         return PublicationYear;
     }
 
-    public String getStatus() {
+    public Boolean getStatus() {
         return Status;
     }
 
@@ -64,7 +65,7 @@ public class Book implements Parcelable {
         PublicationYear = publicationYear;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Boolean status) {
         Status = status;
     }
 
@@ -73,7 +74,10 @@ public class Book implements Parcelable {
         AuthorName = book.readString();
         Genre =book.readString();
         PublicationYear = book.readString();
-        Status = book.readString();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Status = book.readBoolean();
+        }
+
     }
 
     public static final Creator<Book> CREATOR = new Creator<Book>() {
@@ -99,7 +103,9 @@ public class Book implements Parcelable {
         dest.writeString(AuthorName);
         dest.writeString(Genre);
         dest.writeString(PublicationYear);
-        dest.writeString(Status);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            dest.writeBoolean(Status);
+        }
     }
 
 }

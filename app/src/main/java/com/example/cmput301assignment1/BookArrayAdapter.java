@@ -1,10 +1,12 @@
 package com.example.cmput301assignment1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,15 +35,16 @@ public class BookArrayAdapter extends ArrayAdapter<Book> {
         TextView AuthorName = view.findViewById(R.id.AuthorName);
         TextView Genre = view.findViewById(R.id.Genre);
         TextView PublicationYear = view.findViewById(R.id.PublicationYear);
-        TextView Status = view.findViewById(R.id.Status);
+        //Switch Status = view.findViewById(R.id.Status);
+        TextView StatusText = view.findViewById(R.id.StatusText);
 
         BookTitle.setText(book.getBookTitle());
         AuthorName.setText(book.getAuthorName());
         Genre.setText(book.getGenre());
         PublicationYear.setText(book.getPublicationYear());
-        Status.setText(book.getStatus());
 
-
+        //Status.setChecked(book.getStatus());
+        StatusText.setText(book.getStatus() ? "Read" : "Unread");
         return view;
     }
 }
