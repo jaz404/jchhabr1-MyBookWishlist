@@ -55,9 +55,9 @@ public class MainActivity extends AppCompatActivity implements
                 totalBooksRead++;
             }
         }
-        Log.d("MainActivity","Read: "+totalBooks);
+        //Log.d("MainActivity","Read: "+totalBooks);
 
-        Log.d("MainActivity","Read Books Count: "+totalBooksRead);
+        //Log.d("MainActivity","Read Books Count: "+totalBooksRead);
         TotalBooks.setText("Books: "+totalBooks);
         TotalBooksRead.setText("Read: "+totalBooksRead);
 
@@ -66,18 +66,18 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String[] BookTitles = {"1984", "Theory of Everything"};
-        String[] Authors = {"George Orwell","Stephen Hawking"};
-        String[] Genre = {"dystopian","science"};
-        String[] PublicationYear = {"1949","2002"};
+        //String[] BookTitles = {"1984", "Theory of Everything"};
+        //String[] Authors = {"George Orwell","Stephen Hawking"};
+        //String[] Genre = {"dystopian","science"};
+        //String[] PublicationYear = {"1949","2002"};
         boolean[] Status = {true, false};
 
         DataList = new ArrayList<>();
 
 
-        for (int i = 0; i < BookTitles.length; i++) {
-            DataList.add(new Book(BookTitles[i], Authors[i],Genre[i],PublicationYear[i],Status[i]));
-        }
+        //for (int i = 0; i < BookTitles.length; i++) {
+        //    DataList.add(new Book(BookTitles[i], Authors[i],Genre[i],PublicationYear[i],Status[i]));
+        //}
         BookList = findViewById(R.id.BookList);
         bookAdapter = new BookArrayAdapter(this, DataList);
         BookList.setAdapter(bookAdapter);

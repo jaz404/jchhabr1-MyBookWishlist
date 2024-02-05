@@ -41,12 +41,13 @@ public class AddBookFragment extends DialogFragment {
         EditText EditGenre = view.findViewById(R.id.EditGenre);
         EditText EditPublicationYear = view.findViewById(R.id.EditPublicationYear);
         Switch EditStatus = view.findViewById(R.id.EditStatus);
-        AtomicReference<Boolean> switchStatus = new AtomicReference<>(false);
+        //AtomicReference<Boolean> switchStatus = new AtomicReference<>(false);
         TextView EditStatusText = view.findViewById(R.id.EditStatusText); // New TextView for status text
 
         EditStatusText.setText("Unread");
         EditStatus.setOnCheckedChangeListener((buttonView, isChecked) -> {
             EditStatusText.setText(isChecked ? "Read" : "Unread");
+
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -60,8 +61,8 @@ public class AddBookFragment extends DialogFragment {
                     String Genre = EditGenre.getText().toString();
                     String PublicationYear = EditPublicationYear.getText().toString();
 
-                    Boolean Status = switchStatus.get();
-
+                    //Boolean Status = switchStatus.get();
+                    Boolean Status = EditStatus.isChecked();
 
                     listener.addBook(new Book(BookTitle, AuthorName, Genre, PublicationYear , Status));
                     if (getActivity() instanceof MainActivity) {
